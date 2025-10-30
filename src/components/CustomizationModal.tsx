@@ -56,7 +56,7 @@ export function CustomizationModal({
   canvasRef,
   onClose,
   onDownload,
-}: CustomizationModalProps) {
+}: Readonly<CustomizationModalProps>) {
   if (!show || !selectedImage) return null;
 
   return (
@@ -77,11 +77,11 @@ export function CustomizationModal({
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-[1.2fr_1fr] gap-6">
             {/* Preview - Left Side */}
             <div className="space-y-3">
               <h3 className="text-sm font-semibold text-gray-700">Preview</h3>
-              <div className="relative rounded-xl overflow-hidden shadow-lg w-full max-w-xs mx-auto">
+              <div className="relative rounded-xl overflow-hidden shadow-lg w-full max-w-md mx-auto">
                 <canvas
                   ref={canvasRef}
                   className="w-full h-auto"
