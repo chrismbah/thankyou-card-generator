@@ -1,4 +1,4 @@
-export const UNSPLASH_ACCESS_KEY = "4dSjVxLwEayiFOP_5jL_BedLgFTTNFBZ367j9-mmj3k";
+export const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 export const IMAGES_PER_PAGE = 4;
 
 export const FONTS = [
