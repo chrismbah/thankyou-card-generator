@@ -29,6 +29,12 @@ export function Footer() {
             Download & share
           </span>
         </div>
+        <div className="mt-6 pt-6 border-t border-gray-300">
+          <p className="text-xs text-gray-500">
+            © {new Date().getFullYear()} Made by Christian Ebubechukwu Mbah. All
+            rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );

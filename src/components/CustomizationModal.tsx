@@ -60,46 +60,40 @@ export function CustomizationModal({
   if (!show || !selectedImage) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-20 flex items-center justify-center p-4 animate-in fade-in duration-300">
-      <div className="bg-white rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-8">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-bold text-gray-800">
-              Customize Your Card
-            </h2>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            >
-              <X size={24} />
-            </button>
-          </div>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-20 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+          <h2 className="text-xl font-bold text-gray-800">
+            Customize Your Card
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <X size={20} />
+          </button>
+        </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Preview */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-gray-700">Preview</h3>
-              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Preview - Left Side */}
+            <div className="space-y-3">
+              <h3 className="text-sm font-semibold text-gray-700">Preview</h3>
+              <div className="relative rounded-xl overflow-hidden shadow-lg w-full max-w-xs mx-auto">
                 <canvas
                   ref={canvasRef}
                   className="w-full h-auto"
                   style={{ aspectRatio: "4/5" }}
                 />
               </div>
-              <button
-                onClick={onDownload}
-                disabled={!userName.trim()}
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
-              >
-                <Download size={20} />
-                Download Card
-              </button>
             </div>
 
-            {/* Controls */}
-            <div className="space-y-6">
+            {/* Controls - Right Side */}
+            <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
                   Your Name
                 </label>
                 <input
@@ -107,20 +101,20 @@ export function CustomizationModal({
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                   placeholder="Enter your name"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-black focus:outline-none transition-all duration-300"
+                  className="w-full px-3 py-2 text-sm rounded-lg border-2 border-gray-200 focus:border-black focus:outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
                   Font Style
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto pr-1">
                   {FONTS.map((font) => (
                     <button
                       key={font.value}
                       onClick={() => setSelectedFont(font.value)}
-                      className={`px-4 py-3 rounded-xl border-2 transition-all duration-300 ${
+                      className={`px-3 py-2 text-xs rounded-lg border-2 transition-all ${
                         selectedFont === font.value
                           ? "border-purple-500 bg-purple-50"
                           : "border-gray-200 hover:border-purple-300"
@@ -134,19 +128,19 @@ export function CustomizationModal({
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                  <Palette size={18} />
+                <label className="block text-xs font-semibold text-gray-700 mb-1.5 flex items-center gap-1.5">
+                  <Palette size={14} />
                   Text Color
                 </label>
-                <div className="grid grid-cols-6 gap-3">
+                <div className="grid grid-cols-6 gap-2">
                   {COLORS.map((color) => (
                     <button
                       key={color.value}
                       onClick={() => setSelectedColor(color.value)}
-                      className={`w-full aspect-square rounded-xl border-4 transition-all duration-300 transform hover:scale-110 ${
+                      className={`w-full aspect-square rounded-lg border-3 transition-all transform hover:scale-110 ${
                         selectedColor === color.value
-                          ? "border-purple-500 scale-110"
-                          : "border-gray-200"
+                          ? "border-purple-500 scale-110 ring-2 ring-purple-300"
+                          : "border-gray-300"
                       }`}
                       style={{ backgroundColor: color.value }}
                       title={color.name}
@@ -156,6 +150,18 @@ export function CustomizationModal({
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Footer */}
+        <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
+          <button
+            onClick={onDownload}
+            disabled={!userName.trim()}
+            className="w-full flex cursor-pointer items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]"
+          >
+            <Download size={18} />
+            Download Card
+          </button>
         </div>
       </div>
     </div>
